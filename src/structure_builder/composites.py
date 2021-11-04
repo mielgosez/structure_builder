@@ -14,12 +14,12 @@ class ColumnMesh:
         smallest_diameter = 7/8*diameter
         greatest_diameter_difference = 1/8*diameter
         cloud_points = []
-        for i in range(7):
+        for i in range(8):
             diameter_difference = (7-i)*greatest_diameter_difference/7
             local_diameter = smallest_diameter+diameter_difference
-            new_circle = CircleMesh(radius=local_diameter,
+            new_circle = CircleMesh(radius=local_diameter/2,
                                     n_points=self.circle_n_points,
-                                    height=i+self.bottom_height)
+                                    height=diameter*(i+self.bottom_height))
             cloud_points.append(new_circle)
         self.cloud_points = cloud_points
 
