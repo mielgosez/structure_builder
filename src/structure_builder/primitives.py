@@ -2,6 +2,28 @@ import math
 from abc import ABC, abstractmethod
 
 
+class CloudPoints:
+    def __init__(self,
+                 coordinates_dict: dict = None,
+                 parent=None,
+                 child=None):
+        self.__coordinates_dict = coordinates_dict
+        self.__parent = parent
+        self.__child = child
+
+    @property
+    def coordinates_dict(self):
+        return self.__coordinates_dict
+
+    @property
+    def parent(self):
+        return self.__parent
+
+    @property
+    def child(self):
+        return self.__child
+
+
 class BaseMesh(ABC):
     def __init__(self,
                  n_points: int,
