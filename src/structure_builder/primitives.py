@@ -19,9 +19,17 @@ class CloudPoints:
     def parent(self):
         return self.__parent
 
+    @parent.setter
+    def parent(self, new_parent):
+        self.__parent = new_parent
+
     @property
     def child(self):
         return self.__child
+
+    @child.setter
+    def child(self, new_child):
+        self.__child = new_child
 
 
 class BaseMesh(ABC):
@@ -80,7 +88,7 @@ class BaseMesh(ABC):
         return self.__cloud_points
 
     @cloud_points.setter
-    def cloud_points(self, new_cloud: dict):
+    def cloud_points(self, new_cloud: CloudPoints):
         self.__cloud_points = new_cloud
 
     @property
@@ -203,7 +211,8 @@ class CircleMesh(BaseMesh):
             cloud_points['x'][i] = self.x_center + self.radius*math.cos(2*math.pi*i/self.n_points)
             cloud_points['y'][i] = self.y_center + self.radius*math.sin(2*math.pi*i/self.n_points)
             cloud_points['z'][i] = self.height
-        self.cloud_points = cloud_points
+        obj_cloud_point = CloudPoints(coordinates_dict=cloud_points)
+        self.cloud_points = obj_cloud_point
 
     # Getters and setters
     @property
