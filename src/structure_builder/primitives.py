@@ -171,7 +171,8 @@ class RectangularMesh(BaseMesh):
                 print('something wrong')
             if abs(cloud_points['y'][i]) > self.length/2:
                 print('something wrong')
-        self.cloud_points = cloud_points
+        obj_cloud_points = CloudPoints(coordinates_dict=cloud_points)
+        self.cloud_points = obj_cloud_points
 
     # Getters and setters
     @property

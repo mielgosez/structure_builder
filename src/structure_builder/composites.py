@@ -19,7 +19,6 @@ class ColumnMesh(BaseMesh):
         diameter = 2*self.radius
         smallest_diameter = 7/8*diameter
         greatest_diameter_difference = 1/8*diameter
-        cloud_points = dict()
         for i in range(8):
             diameter_difference = (7-i)*greatest_diameter_difference/7
             local_diameter = smallest_diameter+diameter_difference
@@ -28,8 +27,13 @@ class ColumnMesh(BaseMesh):
                                     height=diameter*(i+self.height),
                                     x_center=self.x_center,
                                     y_center=self.y_center)
-            cloud_points.append(new_circle)
-        self.cloud_points = cloud_points
+            cloud_points = new_circle.cloud_points
+            if i == 0:
+                self.cloud_points = cloud_points
+            else:
+                previous_cloud.child = new_circle.cloud_points
+                new_circle.cloud_points.parent = previous_cloud
+            previous_cloud = cloud_points
 
     # Getters and setters
     @property
