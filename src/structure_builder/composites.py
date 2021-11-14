@@ -72,7 +72,7 @@ class CubicMesh(BaseMesh):
             local_height = i*self.height
             new_rectangle = RectangularMesh(
                 n_points=self.n_points,
-                width=self.height,
+                width=self.width,
                 length=self.length,
                 height=local_height,
                 x_center=self.x_center,
