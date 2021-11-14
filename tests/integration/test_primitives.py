@@ -11,7 +11,7 @@ def test_circle_is_visually_ok():
 
 
 def test_rectangle_is_visually_ok():
-    new_rectangle = RectangularMesh(n_points=50, width=10, length=10, height=0)
+    new_rectangle = RectangularMesh(n_points=50, width=10, length=5, height=0)
     plot_points = new_rectangle.cloud_points.coordinates_dict
     plt.scatter(plot_points['x'].values(), plot_points['y'].values(), alpha=0.5)
     plt.show()

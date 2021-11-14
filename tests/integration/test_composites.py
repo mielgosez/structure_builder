@@ -33,7 +33,7 @@ def test_column_displaced():
 
 
 def test_cube_printed_properly():
-    cubic_mesh = CubicMesh(height=5, length=10, width=4)
+    cubic_mesh = CubicMesh(height=5, length=10, width=10)
     ax = plt.axes(projection='3d')
     current_mesh = cubic_mesh.cloud_points
     while current_mesh is not None:
