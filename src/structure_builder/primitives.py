@@ -123,47 +123,47 @@ class RectangularMesh(BaseMesh):
         for i in range(self.n_points):
             angle_value = 2 * math.pi * i / self.n_points
             if angle_value <= math.pi/4:
-                cloud_points['x'][i] = self.length/2
+                cloud_points['x'][i] = self.width/2
                 cloud_points['y'][i] = self.length*math.tan(angle_value)/2
                 cloud_points['z'][i] = self.height
             elif angle_value > 7*math.pi/4:
                 angle_value -= 2*math.pi
                 angle_value = abs(angle_value)
-                cloud_points['x'][i] = self.length/2
+                cloud_points['x'][i] = self.width/2
                 cloud_points['y'][i] = -self.length * math.tan(angle_value)/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > math.pi/4) and (angle_value <= math.pi/2):
                 angle_value -= math.pi/2
                 angle_value = abs(angle_value)
                 cloud_points['x'][i] = self.width*math.tan(angle_value)/2
-                cloud_points['y'][i] = self.width/2
+                cloud_points['y'][i] = self.length/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > math.pi/2) and (angle_value <= 3*math.pi/4):
                 angle_value -= math.pi/2
                 cloud_points['x'][i] = -self.width*math.tan(angle_value)/2
-                cloud_points['y'][i] = self.width/2
+                cloud_points['y'][i] = self.length/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > 3*math.pi/4) and (angle_value <= math.pi):
                 angle_value -= math.pi
                 angle_value = abs(angle_value)
-                cloud_points['x'][i] = -self.length/2
+                cloud_points['x'][i] = -self.width/2
                 cloud_points['y'][i] = self.length*math.tan(angle_value)/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > math.pi) and (angle_value <= 5*math.pi/4):
                 angle_value -= math.pi
-                cloud_points['x'][i] = -self.length/2
+                cloud_points['x'][i] = -self.width/2
                 cloud_points['y'][i] = -self.length*math.tan(angle_value)/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > 5*math.pi/4) and (angle_value <= 3*math.pi/2):
                 angle_value -= 3*math.pi/2
                 angle_value = abs(angle_value)
                 cloud_points['x'][i] = -self.width*math.tan(angle_value)/2
-                cloud_points['y'][i] = -self.width/2
+                cloud_points['y'][i] = -self.length/2
                 cloud_points['z'][i] = self.height
             elif (angle_value > 3*math.pi/2) and (angle_value <= 7*math.pi/4):
                 angle_value -= 3*math.pi/2
                 cloud_points['x'][i] = self.width*math.tan(angle_value)/2
-                cloud_points['y'][i] = -self.width/2
+                cloud_points['y'][i] = -self.length/2
                 cloud_points['z'][i] = self.height
             else:
                 ValueError(f'{angle_value} is not a valid value for an angle.')

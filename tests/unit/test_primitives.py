@@ -9,4 +9,8 @@ def test_number_of_points_in_circle():
 
 
 def test_distance_in_rectangular_is_ok():
-    pass
+    n_points = 50
+    new_rectangle = RectangularMesh(n_points=n_points, width=20, length=10, height=0)
+    coordinates = new_rectangle.cloud_points.coordinates_dict
+    assert 20/2 - (coordinates['x'][7] - coordinates['x'][12]) < 3, 'Width is OK'
+    assert 10/2 - (coordinates['y'][6] - coordinates['y'][0]) < 1, 'Length is OK'
