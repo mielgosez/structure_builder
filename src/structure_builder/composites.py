@@ -6,12 +6,26 @@ class ColumnMesh(BaseMesh):
                  bottom_height: float,
                  radius: float,
                  circle_n_points: int = 20,
+                 smallest_ratio_proportion: float = 7/8,
+                 height_in_number_of_diameters: int = 8,
                  x_center: float = 0.0,
                  y_center: float = 0.0):
+        """
+        Creates the central part of the column with proportions mostly according to classical orders.
+        :param bottom_height: Height of the column.
+        :param radius: Ratio of the column.
+        :param circle_n_points: Number of points that conforms the circles that made up an axial cut.
+        :param smallest_ratio_proportion: thinnest diameter/thickest diameter.
+        :param height_in_number_of_diameters: height/diameters.
+        :param x_center: x of center of column.
+        :param y_center: y of center of column.
+        """
         super().__init__(x_center=x_center,
                          y_center=y_center,
                          height=bottom_height,
                          n_points=circle_n_points)
+        self.__smallest_ratio_proportion = smallest_ratio_proportion
+        self.__height_in_number_of_diameters = height_in_number_of_diameters
         self.__radius = radius
         self.create_cloud_points()
 
@@ -21,11 +35,12 @@ class ColumnMesh(BaseMesh):
         :return: cloud points is updated.
         """
         diameter = 2*self.radius
-        smallest_diameter = 7/8*diameter
-        greatest_diameter_difference = 1/8*diameter
+        smallest_diameter = self.smallest_ratio_proportion*diameter
+        greatest_diameter_difference = (1-self.smallest_ratio_proportion)*diameter
         previous_cloud = None
-        for i in range(8):
-            diameter_difference = (7-i)*greatest_diameter_difference/7
+        for i in range(self.height_in_number_of_diameters):
+            local_proportion = self.height_in_number_of_diameters-1
+            diameter_difference = (local_proportion-i)*greatest_diameter_difference/local_proportion
             local_diameter = smallest_diameter+diameter_difference
             new_circle = CircleMesh(radius=local_diameter/2,
                                     n_points=self.n_points,
@@ -41,6 +56,14 @@ class ColumnMesh(BaseMesh):
             previous_cloud = cloud_points
 
     # Getters and setters
+    @property
+    def height_in_number_of_diameters(self):
+        return self.__height_in_number_of_diameters
+
+    @property
+    def smallest_ratio_proportion(self):
+        return self.__smallest_ratio_proportion
+
     @property
     def radius(self):
         return self.__radius
