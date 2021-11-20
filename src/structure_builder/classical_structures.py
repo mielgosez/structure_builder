@@ -19,6 +19,26 @@ class ClassicalColumns(BaseMesh):
         self.__smallest_ratio_proportion = None
         self.__height_in_number_of_diameters = None
         self.create_cloud_points()
+        self.define_mesh_faces()
+
+    def define_mesh_faces(self):
+        reference_level = self.cloud_points
+        node_list = list()
+        face_list = list()
+        level_count = 0
+        while reference_level.child is not None:
+            for i in range(self.n_points):
+                node_list.append((reference_level.coordinates_dict['x'][i],
+                                  reference_level.coordinates_dict['y'][i],
+                                  reference_level.coordinates_dict['z'][i]))
+                face_list.append((level_count * self.n_points + i,
+                                  level_count * self.n_points + ((i + 1) % self.n_points),
+                                  (level_count + 1) * self.n_points + i,
+                                  (level_count + 1) * self.n_points + ((i + 1) % self.n_points),
+                                  ))
+            level_count += 1
+            reference_level = reference_level.child
+        return node_list, face_list
 
     def set_column_proportions(self):
         if self.column_type == 'doric':
